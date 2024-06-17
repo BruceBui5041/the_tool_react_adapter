@@ -1,8 +1,6 @@
-import React from 'react';
-import { IPageProps } from '../../page-builder/common-interface/page-context-interface';
-import SubComponentBuilder from '../../page-builder/sub-component-builder';
-import { use } from 'passport';
-import { isEqual } from 'lodash';
+import React from "react";
+import { IPageProps } from "../../page-builder/common-interface/page-context-interface";
+import SubComponentBuilder from "../../page-builder/sub-component-builder";
 
 interface INavItem {
   title: string;
@@ -32,36 +30,36 @@ export default React.memo((props: IPageProps<IPageState>) => {
     navItems: [
       {
         id: 1,
-        title: 'Dashboard',
-        icon: 'view-dashboard-outline',
+        title: "Dashboard",
+        icon: "view-dashboard-outline",
         notifCount: 5,
       },
       {
         id: 2,
-        title: 'Orders',
-        icon: 'package-variant-closed',
+        title: "Orders",
+        icon: "package-variant-closed",
       },
       {
         id: 3,
-        title: 'Customers',
-        icon: 'account-supervisor-outline',
+        title: "Customers",
+        icon: "account-supervisor-outline",
         notifCount: 10,
       },
       {
         id: 4,
-        title: 'Inventory',
-        icon: 'warehouse',
+        title: "Inventory",
+        icon: "warehouse",
         notifCount: 1,
       },
       {
         id: 5,
-        title: 'Reports',
-        icon: 'file-chart-outline',
+        title: "Reports",
+        icon: "file-chart-outline",
       },
       {
         id: 6,
-        title: 'Settings',
-        icon: 'cog-outline',
+        title: "Settings",
+        icon: "cog-outline",
       },
     ],
   });
