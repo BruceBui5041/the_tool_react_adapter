@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebpacktemplate=self.webpackChunkwebpacktemplate||[]).push([[1213],{1213:function(e,t,a){a.r(t),t.default=React.memo((e=>{const{setPageData:t,exportPageContext:a,$root:n}=e.pageBuilderContext;return a({updateDataFunction:()=>{t({componentState:Date.now()})}}),React.createElement(React.Fragment,null)}))}}]);

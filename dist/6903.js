@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebpacktemplate=self.webpackChunkwebpacktemplate||[]).push([[6903],{6903:function(e,t,a){a.r(t),t.default=()=>({content:{type:"snackbar",name:"showRemoveSnackbar",labelText:"Undo",onClick:"closeRemoveSnackbar",dismissDirection:"startToEnd",child:{type:"text",text:"{{ removeSnackbarMessage }}"}}})}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebpacktemplate=self.webpackChunkwebpacktemplate||[]).push([[8727],{8727:function(e,t,c){c.r(t),t.default=()=>({content:{type:"column",children:[{type:"text",text:"dashboard content {{ props.selectedItemId }}"}]}})}}]);

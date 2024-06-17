@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebpacktemplate=self.webpackChunkwebpacktemplate||[]).push([[8594],{8594:function(e,t,a){a.r(t);var l=a(3745);t.default=l.memo((e=>l.createElement(l.Fragment,null)))}}]);

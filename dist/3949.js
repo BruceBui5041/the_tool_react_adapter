@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebpacktemplate=self.webpackChunkwebpacktemplate||[]).push([[3949],{3949:function(e,t,a){a.r(t),t.default=()=>({content:{type:"container",className:["side-nav--bg"],child:{type:"row",children:[{type:"text",text:"Dashboard {{ props.selectedItemId }}",style:"textTheme.headlineSmall"}]}}})}}]);
