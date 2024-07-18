@@ -1,5 +1,5 @@
 {
   "extends": "./tsconfig.json",
   "exclude": ["node_modules", "test", "dist", "**/*spec.ts"],
-  "include": ["the_tool_js_module"]
+  "include": ["the_tool_react_adapter"]
 }

@@ -1,23 +1,24 @@
-import * as React from 'react';
-import { PageContext } from '../context/page-context';
-import * as hooks from 'usehooks-ts';
+import * as React from "react";
+import { PageContext } from "../context/page-context";
+import * as hooks from "usehooks-ts";
 
-import clients from '../projects';
 import {
   IHttpRequestOptions,
   IPageBuilderContext,
   IPageRoute,
-} from './common-interface/page-context-interface';
-import _, { isEqual } from 'lodash';
-import { PageContextActions } from './common-interface/page-builder-action';
-import { getPageCodeByPath, getPageLayoutByPath } from './page-utils';
-import { utilsManager } from '../utils-manager';
+} from "./common-interface/page-context-interface";
+import _, { isEqual } from "lodash";
+import { PageContextActions } from "./common-interface/page-builder-action";
+import { getPageCodeByPath, getPageLayoutByPath } from "./page-utils";
+import { utilsManager } from "../utils-manager";
+import { IProjectInfo } from "./common-interface/builder-common-interface";
 
 interface IPageBuilderProps {
   currentProject: string;
   pagePath: string;
   pageId: string;
   pageData: Record<any, any>;
+  clients: Record<string, IProjectInfo>;
 }
 
 interface ISubComponent {
@@ -43,11 +44,11 @@ export const PageBuilder = React.memo((props: IPageBuilderProps) => {
 
   const pagePathId = React.useMemo(
     () => `${props.pagePath}_${props.pageId}`,
-    [],
+    []
   );
 
   const currentProject = React.useMemo(() => {
-    return clients?.[props.currentProject];
+    return props.clients?.[props.currentProject];
   }, [props.currentProject]);
 
   const projectPages = React.useMemo(() => {
@@ -68,11 +69,11 @@ export const PageBuilder = React.memo((props: IPageBuilderProps) => {
    */
   const __registerSubComponent__ = React.useCallback(
     async (componentPathId: string, componentProps: any) => {
-      const lastLodashIndex = componentPathId.lastIndexOf('_');
+      const lastLodashIndex = componentPathId.lastIndexOf("_");
       const componentPath = componentPathId.substring(0, lastLodashIndex);
       const id = componentPathId.substring(
         lastLodashIndex + 1,
-        componentPathId.length,
+        componentPathId.length
       );
 
       const layoutJSON = await getPageLayoutByPath(projectPages, componentPath);
@@ -86,7 +87,7 @@ export const PageBuilder = React.memo((props: IPageBuilderProps) => {
 
       return layoutJSON;
     },
-    [_subComponents, pagePathId, projectPages],
+    [_subComponents, pagePathId, projectPages]
   );
 
   const setPageData = React.useCallback(
@@ -96,14 +97,14 @@ export const PageBuilder = React.memo((props: IPageBuilderProps) => {
         payload: { pagePathId: pagePathId, data, isSilenced },
       });
     },
-    [dispatchPageAction],
+    [dispatchPageAction]
   );
 
   const navigateTo = React.useCallback(
     (
       destinationPagePath: string,
       pageArguments: Record<string, any> = {},
-      options: Record<string, any> = {},
+      options: Record<string, any> = {}
     ) => {
       dispatchPageAction({
         type: PageContextActions.NAVIGATE,
@@ -114,20 +115,20 @@ export const PageBuilder = React.memo((props: IPageBuilderProps) => {
         },
       });
     },
-    [dispatchPageAction],
+    [dispatchPageAction]
   );
 
   const navigateBack = React.useCallback(() => {
-    navigateTo('', {}, { action: 'pop' });
+    navigateTo("", {}, { action: "pop" });
   }, [navigateTo]);
 
   const navigateBackAndGoTo = React.useCallback(
     (destinationPagePath: string, pageArguments: Record<string, any> = {}) => {
       navigateTo(destinationPagePath, pageArguments, {
-        action: 'pop_and_push',
+        action: "pop_and_push",
       });
     },
-    [navigateTo],
+    [navigateTo]
   );
 
   const openDrawer = React.useCallback(() => {
@@ -141,7 +142,7 @@ export const PageBuilder = React.memo((props: IPageBuilderProps) => {
     async (path: string, options: IHttpRequestOptions = {}) => {
       return await contextFunctions.httpRequest?.(path, options);
     },
-    [contextFunctions.httpRequest],
+    [contextFunctions.httpRequest]
   );
 
   const validateForm = React.useCallback(
@@ -150,7 +151,7 @@ export const PageBuilder = React.memo((props: IPageBuilderProps) => {
         (await contextFunctions.validateForm?.(pagePathId, formName)) || false
       );
     },
-    [pagePathId],
+    [pagePathId]
   );
 
   const getRoute = React.useCallback(async (): Promise<Partial<IPageRoute>> => {
@@ -170,7 +171,7 @@ export const PageBuilder = React.memo((props: IPageBuilderProps) => {
         },
       });
     },
-    [],
+    []
   );
 
   const useInitState = React.useCallback(
@@ -180,29 +181,29 @@ export const PageBuilder = React.memo((props: IPageBuilderProps) => {
         initializedPageData = true;
       }
     },
-    [setPageData, initializedPageData],
+    [setPageData, initializedPageData]
   );
 
   const setCookies = React.useCallback(
     async (key: string, value: any): Promise<void> => {
       return contextFunctions?.setCookies?.(key, value);
     },
-    [contextFunctions?.setCookies],
+    [contextFunctions?.setCookies]
   );
 
   const getCookies = React.useCallback<
     <T extends Record<string, any>>(
       key: keyof T,
-      defaultValue?: any,
+      defaultValue?: any
     ) => Promise<any>
   >(
     (key: any, defaultValue?: any): Promise<any> => {
       if (!contextFunctions.getCookies) {
-        throw Error('Not found getCookies function');
+        throw Error("Not found getCookies function");
       }
       return contextFunctions.getCookies(key, defaultValue);
     },
-    [contextFunctions.getCookies],
+    [contextFunctions.getCookies]
   );
 
   const toggleChangeTheme = React.useCallback(() => {
@@ -212,11 +213,11 @@ export const PageBuilder = React.memo((props: IPageBuilderProps) => {
   const setRouteAuth = React.useCallback(
     (authData: Record<string, any>): Promise<any> => {
       if (!contextFunctions.setRouteAuth) {
-        throw Error('Not found setRouteAuth function');
+        throw Error("Not found setRouteAuth function");
       }
       return contextFunctions.setRouteAuth?.(authData);
     },
-    [contextFunctions.setRouteAuth],
+    [contextFunctions.setRouteAuth]
   );
 
   /**
@@ -268,9 +269,9 @@ export const PageBuilder = React.memo((props: IPageBuilderProps) => {
   }, [isMounted(), setPageData]);
 
   React.useEffect(() => {
-    console.log('mount page', props.pagePath);
+    console.log("mount page", props.pagePath);
     return () => {
-      console.log('unmount page', props.pagePath);
+      console.log("unmount page", props.pagePath);
     };
   }, [props.pagePath]);
 
@@ -312,7 +313,7 @@ export const PageBuilder = React.memo((props: IPageBuilderProps) => {
       pageData,
     ]);
 
-  if (!_.get(pageData, '_tLoaded')) {
+  if (!_.get(pageData, "_tLoaded")) {
     return null;
   }
 
@@ -349,6 +350,7 @@ export const PageBuilder = React.memo((props: IPageBuilderProps) => {
                   pageId={componentInfo.id}
                   pagePath={componentInfo.path}
                   pageData={computedProps}
+                  clients={props.clients}
                 />
               );
             })}

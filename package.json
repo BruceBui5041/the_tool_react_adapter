@@ -1,7 +1,7 @@
 {
-  "name": "webpacktemplate",
+  "name": "the_tool_react_adapter",
   "version": "1.0.0",
-  "description": "My template",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config ./build/webpack.dev.conf.js",

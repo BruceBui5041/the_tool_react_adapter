@@ -1,12 +1,12 @@
-import { IPageInfo } from '../app-bridge';
-import platform from 'platform-detect/os.mjs';
+import { IPageInfo } from "../app-bridge";
+import platform from "platform-detect/os.mjs";
 
 export const getClientPageLayout = async (
   projectName: string,
-  pageInfo: IPageInfo,
+  pageInfo: IPageInfo
 ) => {
   try {
-    const selectedProject = (await import(`../projects/${projectName}`))
+    const selectedProject = (await import(`../_projects/${projectName}`))
       .default;
     const { clientPages } = selectedProject;
 
@@ -20,7 +20,7 @@ export const getClientPageLayout = async (
     if (!pageLayout) return null;
     return (await pageLayout())?.default?.();
   } catch (error) {
-    console.error('Error retrieving client page layout:', error);
+    console.error("Error retrieving client page layout:", error);
     return null;
   }
 };
